@@ -18,14 +18,23 @@ function TodoApp() {
   const addTodo = newTodoText => {
     setTodos([...todos, {id: uuid(), task: newTodoText, completed: false}])
   }
-  // React.useEffect(() => {
-  //   console.log('todos')
-  //   console.log(todos)
-  // }, [todos])
+
   const removeTodo = todoId => {
     const updatedTodos = todos.filter(todo => todo.id !== todoId)
     setTodos(updatedTodos);
   }
+
+  const toggleTodo = todoId => {
+    const updatedTodos = todos.map(todo => {
+      return todo.id === todoId ? {...todo, completed: !todo.completed} : todo
+    })
+    setTodos(updatedTodos)
+  }
+
+    // React.useEffect(() => {
+  //   console.log('todos')
+  //   console.log(todos)
+  // }, [todos])
   return (
     <Paper style={{ padding: 0, margin: 0, height: "100vh", backgroundColor: "#fafafa" }} elevation={0}>
       <AppBar color='primary' position='static' style={{ height: "64px" }}>
@@ -36,7 +45,7 @@ function TodoApp() {
       <Grid container justify='center' style={{ marginTop: "1rem" }}>
         <Grid item xs={11} md={8} lg={4}>
           <TodoForm addTodo={addTodo} />
-          <TodoList todos={todos} removeTodo={removeTodo}/>
+          <TodoList todos={todos} removeTodo={removeTodo} toggleTodo={toggleTodo}/>
         </Grid>
       </Grid>
     </Paper>
