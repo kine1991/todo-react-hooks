@@ -5,6 +5,7 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 
 const TodoList = ({todos, removeTodo, toggleTodo, editTodo}) => {
+  if(todos.length)
   return (
     <Paper style={{backgroundColor: "white" }}>
       <List>
@@ -17,6 +18,7 @@ const TodoList = ({todos, removeTodo, toggleTodo, editTodo}) => {
       </List>
     </Paper>
   )
+  return null
 }
 
 export default TodoList;

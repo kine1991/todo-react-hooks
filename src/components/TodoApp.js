@@ -9,12 +9,19 @@ import Grid from "@material-ui/core/Grid";
 import uuid from 'uuid/v4'
 
 function TodoApp() {
-  const initialTodos = [
-    { id: 1, task: "Walk The Goldfish", completed: true },
-    { id: 2, task: "Walk The Goldfish2", completed: false },
-  ];
+  const initialTodos = JSON.parse(window.localStorage.getItem("todos") || "[]")
+  // const initialTodos = [
+  //   { id: 1, task: "Walk The Goldfish", completed: true },
+  //   { id: 2, task: "Walk The Goldfish2", completed: false },
+  // ];
 
   const [todos, setTodos] = React.useState(initialTodos)
+
+  React.useEffect(() => {
+    window.localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
+
+  
   const addTodo = newTodoText => {
     setTodos([...todos, {id: uuid(), task: newTodoText, completed: false}])
   }
@@ -38,10 +45,7 @@ function TodoApp() {
     setTodos(updatedTodos)
   }
 
-    // React.useEffect(() => {
-  //   console.log('todos')
-  //   console.log(todos)
-  // }, [todos])
+
   return (
     <Paper style={{ padding: 0, margin: 0, height: "100vh", backgroundColor: "#fafafa" }} elevation={0}>
       <AppBar color='primary' position='static' style={{ height: "64px" }}>
