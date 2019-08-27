@@ -1,7 +1,7 @@
 import React from "react";
 
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItem";
+// import ListItemText from "@material-ui/core/ListItem";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -20,7 +20,7 @@ const Todo = ({task, completed, id, toggleTodo,  removeTodo, editTodo}) => {
         (
           <>
             <Checkbox checked={completed} onClick={() => toggleTodo(id)}/>
-            <ListItemText style={{textDecoration: completed ? "line-through" : "none"}}>{task} </ListItemText>
+            <div style={{textDecoration: completed ? "line-through" : "none"}}>{task} </div>
             <ListItemSecondaryAction>
               <IconButton aria-label="Edit" onClick={toggleIsEditing} ><EditIcon/></IconButton>
               <IconButton aria-label="Delete" onClick={() => removeTodo(id)}><DeleteIcon/></IconButton>
@@ -29,11 +29,6 @@ const Todo = ({task, completed, id, toggleTodo,  removeTodo, editTodo}) => {
         )
     } 
         </ListItem>
-
-  //   <>
-  //   <ListItem button><ListItemText>sss</ListItemText></ListItem>
-  //   <ListItem button><ListItemText>qqq</ListItemText></ListItem>
-  // </>
   )
 }
 
