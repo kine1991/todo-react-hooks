@@ -5,12 +5,12 @@ import { ThemeContext } from '../contexts/ThemeContext'
 
 const styles = theme => ({
     light: {
-        backgroundColor: theme.palette.common.white[100],
+        backgroundColor: theme.palette.common.white,
         height: "100vh",
         width: "100vw",
     },
     dark: {
-        backgroundColor: theme.palette.common.black[800],
+        backgroundColor: theme.palette.common.black,
         height: "100vh",
         width: "100vw",
     },
