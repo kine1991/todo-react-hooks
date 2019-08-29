@@ -1,16 +1,19 @@
 import React from 'react'
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
-import { ThemeContext } from '../contexts/ThemeContext'
+import { ThemeContext } from '../contexts/theme.context'
+
+// import {amber ,blue ,blueGrey,brown ,common ,cyan ,deepOrange,deepPurple ,green ,grey,indigo,lightBlue,lightGreen ,lime,orange,pink,purple ,red ,teal,yellow } from '@material-ui/core/colors';
+
 
 const styles = theme => ({
     light: {
-        backgroundColor: theme.palette.common.white,
+        backgroundColor: "white",
         height: "100vh",
         width: "100vw",
     },
     dark: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: "black",
         height: "100vh",
         width: "100vw",
     },
@@ -21,7 +24,9 @@ class PageContent extends React.Component {
   render() {
     const {isDarkMode} = this.context
     const {classes} = this.props
-    console.log(isDarkMode)
+    // console.log(isDarkMode)
+    // console.log(colors)
+
     return (
       <Paper className={isDarkMode ? classes.dark : classes.light}> 
         {this.props.children}
