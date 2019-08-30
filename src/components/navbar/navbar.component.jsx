@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Switch from "@material-ui/core/Switch";
-import { ThemeContext } from '../contexts/theme.context'
+import { ThemeContext } from '../../contexts/theme.context'
 
 class Navbar extends React.Component {
     static contextType = ThemeContext

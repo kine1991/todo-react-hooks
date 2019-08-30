@@ -1,8 +1,8 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
-import useInputState from "../hooks/useInputState";
-import { TodosContext } from '../contexts/todos.context'
+import useInputState from "../../hooks/useInputState";
+import { TodosContext } from '../../contexts/todos.context.jsx'
 
 const TodoForm = () => {
   const {addTodo} = React.useContext(TodosContext)
@@ -20,6 +20,3 @@ const TodoForm = () => {
 
 
 export default TodoForm;
-
-
-

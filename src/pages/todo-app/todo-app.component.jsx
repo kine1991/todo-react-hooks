@@ -1,9 +1,10 @@
 import React from "react";
-import TodoList from "./todo-list/todo-list.component";
-import TodoForm from "./todo-form/todo-form.component";
 import Grid from "@material-ui/core/Grid";
-import Navbar from './navbar/navbar.component.jsx'
-import { TodosProvider } from '../contexts/todos.context.jsx'
+import TodoList from "../../components/todo-list/todo-list.component";
+import TodoForm from "../../components/todo-form/todo-form.component";
+import Navbar from '../../components/navbar/navbar.component'
+import { TodosProvider } from '../../contexts/todos.context'
+
 
 function TodoApp() {
   return (

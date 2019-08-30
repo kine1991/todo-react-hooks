@@ -1,13 +1,12 @@
 import React from "react";
-import Todo from "./Todo";
+import Todo from "../todo/todo.component";
 import Paper from "@material-ui/core/Paper";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
-import { TodosContext } from '../contexts/todos.context'
+import { TodosContext } from '../../contexts/todos.context.jsx'
 
 const TodoList = () => {
   const {todos} = React.useContext(TodosContext)
-
   if(todos.length)
   return (
     <Paper style={{backgroundColor: "white" }}>
@@ -25,4 +24,3 @@ const TodoList = () => {
 }
 
 export default TodoList;
-
