@@ -5,8 +5,8 @@ import Palette from '../palette/palette.component'
 
 const styles = {
     paletteList: {
-        width: "300px",
-        height: "300px",
+        width: "260px",
+        height: "260px",
         display: "grid",
         gridTemplateColumns: "repeat(4, 1fr)",
         
@@ -15,7 +15,7 @@ const styles = {
 
 
 
-const PaletteList = ({colors, level, classes, setHexColor}) => {
+const PaletteList = ({colors, level, classes, setSelectedHexColor, selectedHexColor}) => {
     
 
     // добавляет к палитре белый и черный цвета
@@ -25,17 +25,15 @@ const PaletteList = ({colors, level, classes, setHexColor}) => {
         <div className={classes.paletteList}>
             {
                 Object.keys(fullColors).splice(1).map((color, i) => {
-                    const colorHex = fullColors[color][level]
-                    console.log(colorHex)
-                    
+                    const hexColor = fullColors[color][level]
                     return (
-                        <Palette setHexColor={setHexColor} key={i} colorName={color} colorHex={colorHex}/>
+                        <Palette checked={selectedHexColor === hexColor} setSelectedHexColor={setSelectedHexColor} key={i} colorName={color} hexColor={hexColor}/>
                     )
                 })
 
                 // Object.keys(colors).splice(1).map((color, i) => {
                 //     return (
-                //         <Palette setHexColor={setHexColor} key={i} colorName={color} colorHex={colors[color][level]}/>
+                //         <Palette setSelectedHexColor={setSelectedHexColor} key={i} colorName={color} hexColor={colors[color][level]}/>
                 //     )
                 // })
             }
