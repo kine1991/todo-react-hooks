@@ -17,6 +17,7 @@ const styles = theme => ({
         height: "100vh",
         width: "100vw",
     },
+    
 })
 
 class PageContent extends React.Component {

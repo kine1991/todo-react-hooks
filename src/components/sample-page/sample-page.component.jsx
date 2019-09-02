@@ -1,15 +1,3 @@
-// import React from 'react';
-// import PropTypes from 'prop-types';
-// import AppBar from '@material-ui/core/AppBar';
-// import Toolbar from '@material-ui/core/Toolbar';
-// import Typography from '@material-ui/core/Typography';
-// import { makeStyles } from '@material-ui/core/styles';
-// import CssBaseline from '@material-ui/core/CssBaseline';
-// import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-// import Fab from '@material-ui/core/Fab';
-// import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-// import Zoom from '@material-ui/core/Zoom';
-
 
 
 import React from 'react';
@@ -24,6 +12,7 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
+import chroma from 'chroma-js'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,23 +21,28 @@ const useStyles = makeStyles(theme => ({
     width: "400px",
     border: "1px solid black",
     backgroundColor: props => props.color.background,
+    color: props =>  props.color.mainColor,
+    // color: props => props.color.background ? chroma(props.color.background).luminance() >= 0.7 ? "black": "white" : "black",
     overflow: "hidden",
-    position: "relative"
+    position: "relative",
+    
   }, 
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
-    flexGrow: 1,
+    flexGrow: 1, 
   },
   navbar: {
     backgroundColor: props => props.color.navbar,
+    color: props => props.color.navbar ? chroma(props.color.navbar).luminance() >= 0.7 ? "black": "white" : "black",
   },
   fabButton: {
     position: "absolute",
     bottom: "1rem",
     right: "1rem",
-    backgroundColor: props => props.color.button,
+    backgroundColor: props => props.color.element,
+    color: props => props.color.element ? chroma(props.color.element).luminance() >= 0.7 ? "black": "white" : "black",
   },
   samplePageContainer: {
 
@@ -58,7 +52,9 @@ const useStyles = makeStyles(theme => ({
 
 const SamplePage = (props) => {
   const classes = useStyles(props);
-
+  // console.log(props.color.navbar)
+  console.log(props.color)
+  // console.log(chroma(props.color.button).luminance())
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -76,14 +72,10 @@ const SamplePage = (props) => {
         <Box my={2}>
           {[...new Array(6)]
             .map(
-              () => `Cras mattis consectetur purus sit amet fermentum.
-                    Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-                    Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-                    Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-            )
-            .join('\n')}
+              () => `Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
+            ).join('\n')}
         </Box>
-        <Fab  aria-label="add" className={classes.fabButton}>
+        <Fab className={classes.fabButton}>
           <AddIcon />
         </Fab>
       </Container>

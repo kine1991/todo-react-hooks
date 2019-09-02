@@ -1,8 +1,9 @@
 import React from 'react'
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles'; 
 import CheckIcon from "@material-ui/icons/Check";
+import chroma from 'chroma-js'
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
     palette: {
         display: "flex",
         justifyContent: "center",
@@ -12,11 +13,15 @@ const styles = theme => ({
         // height: props => props.showingFullPalette ? "20%" : "33.3333%",
     },
     icon: {
-        color: "whitesmoke"
+        color: props =>  chroma(props.hexColor).luminance() >= 0.7 ? "black": "white",
+        // color: "whitesmoke"
     }
-})
+}))
 
-const Palette = ({hexColor, colorName, classes, setSelectedHexColor, checked}) => {
+
+const Palette = ({hexColor, colorName, setSelectedHexColor, checked}) => {
+    const classes = useStyles({hexColor});
+
     const handleClick = () => {
         setSelectedHexColor(hexColor)
     }
@@ -30,4 +35,4 @@ const Palette = ({hexColor, colorName, classes, setSelectedHexColor, checked}) =
     )
 }
 
-export default withStyles(styles)(Palette)
+export default Palette
