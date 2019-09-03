@@ -31,8 +31,10 @@ const PaletteContainer = ({ setColor, color, typeElement}) => {
 
     React.useEffect(() => {
         setValueHexColor(selectedHexColor)
-        // 
-        setColor({...color, [typeElement]: selectedHexColor})    
+        // selectedHexColor - изначально не выбран null
+        if(selectedHexColor){
+            setColor({...color, [typeElement]: selectedHexColor})    
+        }
     }, [selectedHexColor])
 
     return (
