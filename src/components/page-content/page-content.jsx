@@ -1,5 +1,5 @@
 import React from 'react'
-import Paper from "@material-ui/core/Paper";
+// import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import { ThemeContext } from '../../contexts/theme.context.jsx'
 
@@ -9,12 +9,12 @@ import { ThemeContext } from '../../contexts/theme.context.jsx'
 const styles = theme => ({
     light: {
         backgroundColor: "white",
-        height: "100vh",
+        height: "100%",
         width: "100vw",
     },
     dark: {
         backgroundColor: "black",
-        height: "100vh",
+        height: "100%",
         width: "100vw",
     },
     
@@ -25,13 +25,11 @@ class PageContent extends React.Component {
   render() {
     const {isDarkMode} = this.context
     const {classes} = this.props
-    // console.log(isDarkMode)
-    // console.log(colors)
 
     return (
-      <Paper className={isDarkMode ? classes.dark : classes.light}> 
+      <div className={isDarkMode ? classes.dark : classes.light}> 
         {this.props.children}
-      </Paper>
+      </div>
     )
   }
 }
