@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from 'react-router-dom'
 import TodoApp from "./pages/todo-app/todo-app.component";
-import PageContent from './components/page-content/page-content'
+import PageContent from './components/page-content/page-content.component'
 import Navbar from './components/navbar/navbar.component'
 import ThemePage from './pages/theme/theme.component'
 import { ThemeProvider } from './contexts/theme.context.jsx'

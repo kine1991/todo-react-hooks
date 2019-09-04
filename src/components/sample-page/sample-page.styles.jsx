@@ -4,7 +4,7 @@ import chroma from 'chroma-js'
 export const useStyles = makeStyles(theme => ({
   root: {
     height: "800px",
-    maxWidth: "400px",
+    maxWidth: "500px",
     border: "1px solid black",
     backgroundColor: props => props.color.background,
     color: props =>  props.color.mainColor,

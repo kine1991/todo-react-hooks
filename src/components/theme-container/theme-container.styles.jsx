@@ -36,5 +36,10 @@ export const useStyles = makeStyles(theme => ({
         flex: 1,
         marginTop: "50px",
         margin: "0 auto"
+    },
+    button: {
+        // textAlign: "center"
+        // margin: "0 auto"
+        marginTop: "1rem"
     }
 }));
