@@ -1,20 +1,17 @@
 import React from 'react'
 import CheckIcon from "@material-ui/icons/Check";
 import { useStyles } from './palette.styles'
+import { PaletteContext } from '../../contexts/palette.context'
 
 
-const Palette = ({hexColor, colorName, setSelectedHexColor, checked}) => {
-    const classes = useStyles({hexColor});
-
-    const handleClick = () => {
-        setSelectedHexColor(hexColor)
-    }
-
+const Palette = ({hexColor}) => {
+    const {setSelectedHexColor, selectedHexColor} = React.useContext(PaletteContext)
+    const checked = selectedHexColor === hexColor
+    
+    const classes = useStyles({hexColor, checked});
     return (
-        <div onClick={handleClick} className={classes.palette} style={ checked ? {backgroundColor: hexColor,  border: '1px solid white'} : {backgroundColor: hexColor,  border: '1px solid transparent'}}>
-            {
-                checked ? (<CheckIcon className={classes.icon} />) : null
-            }
+        <div onClick={() => setSelectedHexColor(hexColor)} className={classes.palette}>
+            {checked ? (<CheckIcon className={classes.icon} />) : null}
         </div>
     )
 }

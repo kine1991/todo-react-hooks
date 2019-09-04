@@ -4,6 +4,7 @@ import SamplePage from '../../components/sample-page/sample-page.component'
 import { useStyles } from './theme-container.styles'
 import Button from '@material-ui/core/Button';
 import { ThemeContext } from '../../contexts/theme.context'
+import { PaletteProvider } from '../../contexts/palette.context'
 
 const ThemeContainer = () => {
     const classes = useStyles()
@@ -15,18 +16,29 @@ const ThemeContainer = () => {
 
 
     return (
-        <div className={classes.themeContainer}>
-            <div className={classes.paletteContainer}>
-                <PaletteContainer typeElement="background" color={currentPalette}  setColor={setCurrentPalette} />
-                <PaletteContainer typeElement="navbar" color={currentPalette} setColor={setCurrentPalette} />
-                <PaletteContainer typeElement="element" color={currentPalette} setColor={setCurrentPalette} />
-                <PaletteContainer typeElement="mainColor" color={currentPalette} setColor={setCurrentPalette} /> 
+    
+            <div className={classes.themeContainer}>
+                <div className={classes.paletteContainer}>
+                    <PaletteProvider>
+                        <PaletteContainer typeElement="background" color={currentPalette}  setColor={setCurrentPalette} />
+                    </PaletteProvider>
+                    <PaletteProvider>
+                        <PaletteContainer typeElement="navbar" color={currentPalette} setColor={setCurrentPalette} />
+                    </PaletteProvider>
+                    <PaletteProvider>
+                        <PaletteContainer typeElement="element" color={currentPalette} setColor={setCurrentPalette} />
+                    </PaletteProvider>
+                    <PaletteProvider>
+                        <PaletteContainer typeElement="mainColor" color={currentPalette} setColor={setCurrentPalette} /> 
+                    </PaletteProvider>
+                </div>
+                <div className={classes.samplePage}>
+                    <SamplePage color={currentPalette}/>
+                    <Button className={classes.button} onClick={setThemeIntoLS} variant="contained" color="primary">Apply</Button>
+                </div>
             </div>
-            <div className={classes.samplePage}>
-                <SamplePage color={currentPalette}/>
-                <Button className={classes.button} onClick={setThemeIntoLS} variant="contained" color="primary">Apply</Button>
-            </div>
-        </div>
+
+        // </PaletteProvider>
     )
 }
 

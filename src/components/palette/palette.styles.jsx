@@ -6,12 +6,11 @@ export const useStyles = makeStyles(theme => ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        border: "1px solid black",
         height: "60px",
-        // height: props => props.showingFullPalette ? "20%" : "33.3333%",
+        backgroundColor: props => props.hexColor,
+        border: props => props.checked ? '1px solid white' : '1px solid transparent'
     },
     icon: {
         color: props =>  chroma(props.hexColor).luminance() >= 0.7 ? "black": "white",
-        // color: "whitesmoke"
     }
 }))
