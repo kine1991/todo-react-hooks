@@ -5,13 +5,13 @@ export const ThemeContext = React.createContext()
 
 export const ThemeProvider = ({children}) => {
     const initialPalette = {
-        lightMode: {background: 'white', navbar: 'blue', element: '#ffca28', mainColor: "black",  fontSize: "15px"},
-        darkMode: {background: 'black', navbar: 'white', element: '#ffca28', mainColor: "white",  fontSize: "30px"},
+        lightMode: {background: 'red', navbar: 'red', element: 'red', mainColor: "red",  fontSize: "lightMode"},
+        darkMode: {background: 'blue', navbar: 'blue', element: 'blue', mainColor: "blue",  fontSize: "darkMode"},
     }
     const savedPalettes = JSON.parse(localStorage.getItem('themePalettePage'))
     
     const [isDarkMode, setIsDarkMode] = React.useState(false)
-    const [mode, setMode] = React.useState('darkMode')
+    const [mode, setMode] = React.useState('lightMode')
     const [paletteLightAndDark, setPaletteLightAndDark] = React.useState(savedPalettes ||  initialPalette)
     const [currentPalette, setCurrentPalette] = React.useState(savedPalettes[mode] ||  initialPalette[mode])
     
@@ -19,8 +19,8 @@ export const ThemeProvider = ({children}) => {
 
     React.useEffect(() => {
         setMode(isDarkMode ? 'darkMode' : 'lightMode')
-        setPaletteLightAndDark(savedPalettes ||  initialPalette) 
         setCurrentPalette(savedPalettes[mode] ||  initialPalette[mode]) 
+        setPaletteLightAndDark(savedPalettes ||  initialPalette) 
     }, [isDarkMode])
 
     return ( 

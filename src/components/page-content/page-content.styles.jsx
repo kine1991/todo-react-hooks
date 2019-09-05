@@ -5,14 +5,10 @@
 
 import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(theme => ({
-    light: {
-        backgroundColor: "white",
+    PageContent: {
+        backgroundColor: currentPalette => currentPalette.background,
         height: "100%",
         width: "100vw",
-    },
-    dark: {
-        backgroundColor: "black",
-        height: "100%",
-        width: "100vw",
-    },
+
+    }
 }))

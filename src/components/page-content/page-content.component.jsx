@@ -4,14 +4,15 @@ import { useStyles } from './page-content.styles'
 
 
 const PageContent = ({children}) => {
+  const {isDarkMode, currentPalette} = React.useContext(ThemeContext)
+  // console.log(currentPalette)
 
-  const classes = useStyles()
-  const {isDarkMode} = React.useContext(ThemeContext)
+  const classes = useStyles({isDarkMode, currentPalette})
 
 
 
   return (
-    <div className={isDarkMode ? classes.dark : classes.light}> 
+    <div className={classes.pageContent} /*style={{backgroundColor: currentPalette.background}}*/> 
       {children}
     </div>
   )

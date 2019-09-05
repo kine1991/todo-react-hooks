@@ -8,10 +8,9 @@ import { PaletteProvider } from '../../contexts/palette.context'
 
 const ThemeContainer = () => {
     const classes = useStyles()
-    const {currentPalette, setCurrentPalette} = React.useContext(ThemeContext)
+    const {currentPalette, paletteLightAndDark} = React.useContext(ThemeContext)
     const setThemeIntoLS = () => {
-
-        // localStorage.setItem('themePalettePage', JSON.stringify(color));
+        localStorage.setItem('themePalettePage', JSON.stringify(paletteLightAndDark));
     }
 
 
@@ -20,16 +19,16 @@ const ThemeContainer = () => {
             <div className={classes.themeContainer}>
                 <div className={classes.paletteContainer}>
                     <PaletteProvider>
-                        <PaletteContainer typeElement="background" color={currentPalette}  setColor={setCurrentPalette} />
+                        <PaletteContainer typeElement="background"/>
                     </PaletteProvider>
                     <PaletteProvider>
-                        <PaletteContainer typeElement="navbar" color={currentPalette} setColor={setCurrentPalette} />
+                        <PaletteContainer typeElement="navbar"/>
                     </PaletteProvider>
                     <PaletteProvider>
-                        <PaletteContainer typeElement="element" color={currentPalette} setColor={setCurrentPalette} />
+                        <PaletteContainer typeElement="element"/>
                     </PaletteProvider>
                     <PaletteProvider>
-                        <PaletteContainer typeElement="mainColor" color={currentPalette} setColor={setCurrentPalette} /> 
+                        <PaletteContainer typeElement="mainColor"/> 
                     </PaletteProvider>
                 </div>
                 <div className={classes.samplePage}>

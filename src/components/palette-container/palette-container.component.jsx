@@ -9,7 +9,7 @@ import { ThemeContext } from '../../contexts/theme.context'
 import { PaletteContext } from '../../contexts/palette.context'
 
 const PaletteContainer = ({ /*setColor, color,*/ typeElement}) => {
-    const {currentPalette, setCurrentPalette} = React.useContext(ThemeContext)
+    const {mode , currentPalette, setCurrentPalette, paletteLightAndDark, setPaletteLightAndDark} = React.useContext(ThemeContext)
     const {level, setLevel, valueSlider, setValueSlider, valueHexColor, setValueHexColor, selectedHexColor} = React.useContext(PaletteContext)
     const classes = useStyles({currentPalette})
 
@@ -28,9 +28,13 @@ const PaletteContainer = ({ /*setColor, color,*/ typeElement}) => {
         setValueHexColor(selectedHexColor)
         // selectedHexColor - изначально не выбран = null
         if(selectedHexColor){
-            setCurrentPalette({...currentPalette, [typeElement]: selectedHexColor})    
+            setCurrentPalette({...currentPalette, [typeElement]: selectedHexColor}) // {lightMode: {background: "#000", navbar: "#263238", element: "#000", mainColor: "#1b5e20", fontSize: "30px"}, darkMode: {background: "#000", navbar: "#263238", element: "#000", mainColor: "#1b5e20", fontSize: "30px"}}
         }
     }, [selectedHexColor])
+
+    React.useEffect(() => {
+        setPaletteLightAndDark({...paletteLightAndDark, [mode]: currentPalette})  // {background: "#000", navbar: "#263238", element: "#000", mainColor: "#1b5e20", fontSize: "30px"}
+    }, [currentPalette])
 
     return (
         <div className={classes.paletteContainer}>
