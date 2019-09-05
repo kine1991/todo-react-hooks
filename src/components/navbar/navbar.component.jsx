@@ -5,11 +5,15 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Switch from "@material-ui/core/Switch";
 import { ThemeContext } from '../../contexts/theme.context'
 
+import { useStyles } from './navbar.styles'
+
+
 
 const Navbar = () => {
-    const {isDarkMode, toggleTheme} = React.useContext(ThemeContext)
+    const {isDarkMode, toggleTheme, currentPalette} = React.useContext(ThemeContext)
+    const classes = useStyles({currentPalette})
     return (
-        <AppBar color='primary' position='static' style={{ height: "64px" }}>
+        <AppBar className={classes.navbar}  /*color='primary'*/ position='static' style={{ height: "64px" }}>
             <Toolbar> 
                 <Typography color='inherit'>TODOS WITH HOOKS</Typography>
                 <Switch  checked={isDarkMode} onChange={toggleTheme}/>
