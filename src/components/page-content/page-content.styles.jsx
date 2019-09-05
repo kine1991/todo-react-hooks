@@ -5,10 +5,12 @@
 
 import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(theme => ({
-    PageContent: {
-        backgroundColor: currentPalette => currentPalette.background,
-        height: "100%",
+    pageContent: {
+        // backgroundColor: isDarkMode => isDarkMode ? 'black' : 'red',
+        // backgroundColor: 'green !important',
+        backgroundColor: props => props.currentPalette.background,
+        minHeight: "100vh",
         width: "100vw",
-
-    }
+        // padding: "3rem"
+    },
 }))

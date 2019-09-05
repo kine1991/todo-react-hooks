@@ -13,29 +13,27 @@ const ThemeContainer = () => {
         localStorage.setItem('themePalettePage', JSON.stringify(paletteLightAndDark));
     }
 
-
     return (
-    
-            <div className={classes.themeContainer}>
-                <div className={classes.paletteContainer}>
-                    <PaletteProvider>
-                        <PaletteContainer typeElement="background"/>
-                    </PaletteProvider>
-                    <PaletteProvider>
-                        <PaletteContainer typeElement="navbar"/>
-                    </PaletteProvider>
-                    <PaletteProvider>
-                        <PaletteContainer typeElement="element"/>
-                    </PaletteProvider>
-                    <PaletteProvider>
-                        <PaletteContainer typeElement="mainColor"/> 
-                    </PaletteProvider>
-                </div>
-                <div className={classes.samplePage}>
-                    <SamplePage color={currentPalette}/>
-                    <Button className={classes.button} onClick={setThemeIntoLS} variant="contained" color="primary">Apply</Button>
-                </div>
+        <div className={classes.themeContainer}>
+            <div className={classes.paletteContainers}>
+                <PaletteProvider>
+                    <PaletteContainer typeElement="background"/>
+                </PaletteProvider>
+                <PaletteProvider>
+                    <PaletteContainer typeElement="navbar"/>
+                </PaletteProvider>
+                <PaletteProvider>
+                    <PaletteContainer typeElement="element"/>
+                </PaletteProvider>
+                <PaletteProvider>
+                    <PaletteContainer typeElement="mainColor"/> 
+                </PaletteProvider>
             </div>
+            <div className={classes.samplePage}>
+                <SamplePage color={currentPalette}/>
+                <Button className={classes.button} onClick={setThemeIntoLS} variant="contained" color="primary">Apply</Button>
+            </div>
+        </div>
 
         // </PaletteProvider>
     )

@@ -15,7 +15,7 @@ export const useStyles = makeStyles(theme => ({
       height: "1600px",
     },
     [theme.breakpoints.down('xs')]: {
-      height: "460px"
+      height: "460px",
     },
   }, 
   menuButton: {

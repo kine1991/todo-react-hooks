@@ -5,23 +5,26 @@ export const ThemeContext = React.createContext()
 
 export const ThemeProvider = ({children}) => {
     const initialPalette = {
-        lightMode: {background: 'red', navbar: 'red', element: 'red', mainColor: "red",  fontSize: "lightMode"},
-        darkMode: {background: 'blue', navbar: 'blue', element: 'blue', mainColor: "blue",  fontSize: "darkMode"},
+        lightMode: {background: 'white', navbar: 'white', element: 'white', mainColor: "white"},
+        darkMode: {background: 'black', navbar: 'black', element: 'black', mainColor: "black"},
     }
     const savedPalettes = JSON.parse(localStorage.getItem('themePalettePage'))
     
     const [isDarkMode, setIsDarkMode] = React.useState(false)
-    const [mode, setMode] = React.useState('lightMode')
-    const [paletteLightAndDark, setPaletteLightAndDark] = React.useState(savedPalettes ||  initialPalette)
-    const [currentPalette, setCurrentPalette] = React.useState(savedPalettes[mode] ||  initialPalette[mode])
-    
-    // console.log(currentPalette)
+    const [mode, setMode] = React.useState(isDarkMode ? 'darkMode' : 'lightMode')
+    const [paletteLightAndDark, setPaletteLightAndDark] = React.useState(savedPalettes ? savedPalettes : initialPalette)
+    const [currentPalette, setCurrentPalette] = React.useState(savedPalettes ?  savedPalettes[mode] : initialPalette[mode])
 
+    console.log(mode)
+    
     React.useEffect(() => {
         setMode(isDarkMode ? 'darkMode' : 'lightMode')
-        setCurrentPalette(savedPalettes[mode] ||  initialPalette[mode]) 
-        setPaletteLightAndDark(savedPalettes ||  initialPalette) 
     }, [isDarkMode])
+
+    React.useEffect(() => {
+        setCurrentPalette(savedPalettes ? savedPalettes[mode] : initialPalette[mode]) 
+        setPaletteLightAndDark(savedPalettes ?  savedPalettes : initialPalette) 
+    }, [mode])
 
     return ( 
         <ThemeContext.Provider value={{mode, setMode, paletteLightAndDark, setPaletteLightAndDark, currentPalette, setCurrentPalette, isDarkMode, toggleTheme: () => setIsDarkMode(!isDarkMode)}}>
