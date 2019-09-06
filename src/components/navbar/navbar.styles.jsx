@@ -4,4 +4,7 @@ export const useStyles = makeStyles(theme => ({
         // color: props => props.currentPalette.mainColor,
         backgroundColor: props => props.currentPalette.navbar,
     },
+    title: {
+        flexGrow: 1
+    }
 }))
