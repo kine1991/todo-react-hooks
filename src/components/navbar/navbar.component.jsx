@@ -65,7 +65,7 @@ const Navbar = () => {
           </Toolbar>
         </AppBar>
 
-        <SwipeableDrawer open={openDrawer} onClose={() => setOpenDrawer(false)}>
+        <SwipeableDrawer className={classes.drawer} open={openDrawer} onOpen={() => setOpenDrawer(true)} onClose={() => setOpenDrawer(false)}>
           <List>
             {listItems1.map((text, i) => (
               <ListItem button key={text}><ListItemIcon><InboxIcon /></ListItemIcon><ListItemText primary={text} /></ListItem>

@@ -9,14 +9,16 @@ export const ThemeProvider = ({children}) => {
         darkMode: {background: "#263238", navbar: "#000", element: "black", mainColor: "#558b2f"}
     }
     const savedPalettes = JSON.parse(localStorage.getItem('themePalettePage'))
+    const isDarkModeFromLS = JSON.parse(localStorage.getItem('isDarkMode'))
     
-    const [isDarkMode, setIsDarkMode] = React.useState(false)
+    const [isDarkMode, setIsDarkMode] = React.useState(isDarkModeFromLS ? isDarkModeFromLS : false)
     const [mode, setMode] = React.useState(isDarkMode ? 'darkMode' : 'lightMode')
     const [paletteLightAndDark, setPaletteLightAndDark] = React.useState(savedPalettes ? savedPalettes : initialPalette)
     const [currentPalette, setCurrentPalette] = React.useState(savedPalettes ?  savedPalettes[mode] : initialPalette[mode])
 
     
     React.useEffect(() => {
+        localStorage.setItem('isDarkMode', isDarkMode)
         setMode(isDarkMode ? 'darkMode' : 'lightMode')
     }, [isDarkMode])
 

@@ -6,5 +6,9 @@ export const useStyles = makeStyles(theme => ({
     },
     title: {
         flexGrow: 1
+    },
+    drawer: {
+        width: "600px",
+        
     }
 }))
