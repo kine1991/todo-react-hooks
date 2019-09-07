@@ -34,8 +34,6 @@ const ThemeContainer = () => {
                 <Button className={classes.button} onClick={setThemeIntoLS} variant="contained" color="primary">Apply</Button>
             </div>
         </div>
-
-        // </PaletteProvider>
     )
 }
 

@@ -65,18 +65,20 @@ const Navbar = () => {
           </Toolbar>
         </AppBar>
 
-        <SwipeableDrawer className={classes.drawer} open={openDrawer} onOpen={() => setOpenDrawer(true)} onClose={() => setOpenDrawer(false)}>
-          <List>
-            {listItems1.map((text, i) => (
-              <ListItem button key={text}><ListItemIcon><InboxIcon /></ListItemIcon><ListItemText primary={text} /></ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {listItems2.map((text, i) => (
-              <ListItem button key={text}><ListItemIcon><InboxIcon /></ListItemIcon><ListItemText primary={text} /></ListItem>
-            ))}
-          </List>
+        <SwipeableDrawer open={openDrawer} onOpen={() => setOpenDrawer(true)} onClose={() => setOpenDrawer(false)}>
+          <div className={classes.list}>
+            <List>
+              {listItems1.map((text, i) => (
+                <ListItem button key={text}><ListItemIcon><InboxIcon /></ListItemIcon><ListItemText primary={text} /></ListItem>
+              ))}
+            </List>
+            <Divider />
+            <List>
+              {listItems2.map((text, i) => (
+                <ListItem button key={text}><ListItemIcon><InboxIcon /></ListItemIcon><ListItemText primary={text} /></ListItem>
+              ))}
+            </List>
+          </div>
         </SwipeableDrawer>
 
       </div>

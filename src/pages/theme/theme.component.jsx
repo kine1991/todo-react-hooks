@@ -1,26 +1,40 @@
 import React from 'react'
-import { withStyles } from "@material-ui/core/styles";
 import ThemeContainer from '../../components/theme-container/theme-container.component'
-import { styles } from './theme.styles'
-// import * as colors from '@material-ui/core/colors';
-// console.log(colors)
-// const map = {"1": 50, "2": 100, "3": 200, "4": 300, "5": 400, "6": 500, "7": 600, "8": 700, "9": 800, "10": 900, "11": "A100", 12: "A200", 13: "A400", 14: "A700"}
+import { useStyles } from './theme.styles'
 import { ThemeContext } from '../../contexts/theme.context'
-
+import Spinner from '../../components/spinner/spinner.component'
 
 
   
 
 
-const ThemePage = ({classes}) => {
+const ThemePage = () => {
     const {mode} = React.useContext(ThemeContext)
+    const classes = useStyles()
+
+    const [loading, setLoading] = React.useState(false)
+
+
+
+    React.useEffect(() => {
+        // setTimeout(() => {
+        //     setLoading(false)
+        //     console.log()
+        // }, 3000)
+    }, [loading])
     
-    return (
-        <div className={classes.root}>
+    return ( 
+      <div className={classes.root}>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
             <h1 className={classes.title}>{mode}</h1>
-            <ThemeContainer/>
-        </div>
-    )
+            <ThemeContainer />
+          </>
+        )}
+      </div>
+    );
 }
 
-export default withStyles(styles)(ThemePage)
+export default ThemePage
