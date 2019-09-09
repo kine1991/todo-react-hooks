@@ -1,21 +1,10 @@
 import React from "react";
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-import { makeStyles } from '@material-ui/core/styles';
 import { auth } from '../../firebase/firebase'
+import { useStyles } from './login.styles'
 
 
-export const useStyles = makeStyles(theme => ({
-    login: {
-        width: "500px",
-        height: "400px",
-        margin : '3rem auto',
-        boxShadow: "1px 1px 3px rgba(0,0,0, 0.3)",
-    },
-    form: {
-        padding: "3rem",
-    }
-})) 
 
 const Login = () => {
   const [values, setValues] = React.useState({email: '', password: ''})
@@ -39,9 +28,11 @@ const Login = () => {
   return (
     <div className={classes.login}>
         <ValidatorForm /*ref="form"*/ className={classes.form} onSubmit={handleSubmit} onError={errors => console.log(errors)}>
-            <TextValidator margin="normal" fullWidth label="Email" onChange={handleChange} name="email" value={values.email} validators={['required', 'isEmail']} errorMessages={['this field is required', 'email is not valid']}/>
+        <h1 className={classes.title}>Login</h1>
+            <TextValidator  fullWidth label="Email" onChange={handleChange} name="email" value={values.email} validators={['required', 'isEmail']} errorMessages={['this field is required', 'email is not valid']}/>
             <TextValidator margin="normal" fullWidth label="Password" onChange={handleChange} name="password" value={values.password} validators={['required']} errorMessages={['this field is required']}/>
-            <Button variant="contained" color="primary"  fullWidth type="submit">Submit</Button>
+            <Button className={classes.button} variant="contained" color="primary"  fullWidth type="submit">Submit</Button>
+            <Button className={classes.button} color="primary" variant="outlined" fullWidth>Google</Button>
         </ValidatorForm>
     </div>
   );
