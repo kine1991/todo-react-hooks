@@ -2,39 +2,37 @@ import React from 'react'
 import ThemeContainer from '../../components/theme-container/theme-container.component'
 import { useStyles } from './theme.styles'
 import { ThemeContext } from '../../contexts/theme.context'
-import Spinner from '../../components/spinner/spinner.component'
+import WithSpinner from '../../components/with-spinner/with-spinner.component'
 
 
   
+const ThemeContainerWithSpinner = WithSpinner(ThemeContainer)
 
-
-const ThemePage = () => {
+const ThemePage = (props) => {
     const {mode} = React.useContext(ThemeContext)
+    const [loading, setLoading] = React.useState(true)
     const classes = useStyles()
 
-    const [loading, setLoading] = React.useState(false)
-
-
-
     React.useEffect(() => {
-        // setTimeout(() => {
-        //     setLoading(false)
-        //     console.log()
-        // }, 3000)
-    }, [loading])
+      let p = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve();
+        }, 3000);
+      });
+      p.then(() => setLoading(false))
+    }, [])
     
+
+    
+
     return ( 
       <div className={classes.root}>
-        {loading ? (
-          <Spinner />
-        ) : (
-          <>
-            <h1 className={classes.title}>{mode}</h1>
-            <ThemeContainer />
-          </>
-        )}
+        <h1 className={classes.title}>{mode}</h1>
+        <ThemeContainerWithSpinner loading={loading} {...props} /> 
+        {/* <ThemeContainer/> */}
       </div>
     );
 }
+
 
 export default ThemePage
