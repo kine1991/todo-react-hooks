@@ -1,30 +1,26 @@
 import React from 'react';
+import chroma from 'chroma-js'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
 
+import { ThemeContext } from '../../contexts/theme.context'
 
 const StyledButton = withStyles({
   root: {
     background: props => props.color,
+    color: props =>  chroma(props.color).luminance() >= 0.7 ? "black": "white",
   },
-})(({ classes, color, ...other }) => <Button className={classes.root} {...other} />);
+})(({ classes, color, ...other }) => {
+    // console.log(other)
+    return (
+        <Button className={classes.root} {...other} />
+    )
+});
 
 export default function DynamicCSS() {
-  const [color, setColor] = React.useState('red');
-
-  const handleChange = event => {
-    setColor(event.target.checked ? 'blue' : 'default');
-  };
+  const {currentPalette} = React.useContext(ThemeContext)
 
   return (
-    <React.Fragment>
-      <FormControlLabel
-        control={<Switch checked={color === 'blue'} onChange={handleChange} color="primary" value="dynamic-class-name"/>}
-        label="Blue"
-      />
-      <StyledButton color={color}>Dynamic CSS</StyledButton>
-    </React.Fragment>
+      <StyledButton color={currentPalette.element} x="x">Dynamic CSS</StyledButton>
   );
 }
