@@ -7,27 +7,29 @@ import Navbar from './components/navbar/navbar.component'
 import ThemePage from './pages/theme/theme.component'
 import Login from './pages/login/login.component'
 import Register from './pages/register/register.component'
-import { ThemeProvider } from './contexts/theme.context.jsx'
-import './App.css'
+import WithSpinner from './components/with-spinner/with-spinner.component'
 
+import { AuthContext } from './contexts/auth.context'
+
+
+// import './App.css'
+
+const PageContentWithSpinner = WithSpinner(PageContent)
 
 const App = () => {
+  const {loading} = React.useContext(AuthContext)
+  console.log(loading)
   return (
-    <div className="xxx">
-    <ThemeProvider>
-      <PageContent>
-          <Navbar/>
-          <Switch>
-            <Route exact path="/" render={() => <h1>Home</h1>}/>
-            <Route exact path="/login" component={Login}/>
-            <Route exact path="/register" component={Register}/>
-            <Route exact path="/todo" component={TodoApp}/>
-            <Route exact path="/settings/theme" component={ThemePage}/>
-          </Switch>
-      </PageContent>
-    </ThemeProvider>
-
-    </div>
+    <PageContentWithSpinner loading={loading}>
+        <Navbar/>
+        <Switch>
+          <Route exact path="/" render={() => <h1>Home</h1>}/>
+          <Route exact path="/login" component={Login}/>
+          <Route exact path="/register" component={Register}/>
+          <Route exact path="/todo" component={TodoApp}/>
+          <Route exact path="/settings/theme" component={ThemePage}/>
+        </Switch>
+    </PageContentWithSpinner>
   )
 }
 

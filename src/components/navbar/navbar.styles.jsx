@@ -9,5 +9,14 @@ export const useStyles = makeStyles(theme => ({
     },
     list: {
         width: "250px",
-    }
+    },
+    link: {
+        textDecoration: "none",
+        color: "white",
+        padding: "0 1rem"
+        // outline: "none",
+    },
+    // "a": {
+    //     textDecoration: "none"
+    // }
 }))

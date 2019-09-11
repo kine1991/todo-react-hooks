@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -15,21 +16,22 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+// import { auth } from '../../firebase/firebase'
 
 
 import { ThemeContext } from '../../contexts/theme.context'
+import { AuthContext } from '../../contexts/auth.context'
 import { useStyles } from './navbar.styles'
 
 
 
 const Navbar = () => {
     const {isDarkMode, toggleTheme, currentPalette} = React.useContext(ThemeContext)
-    const classes = useStyles({currentPalette})
-
-    const [auth, setAuth] = React.useState(true);
+    const {/*userData,*/ isAuth} = React.useContext(AuthContext)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const [openDrawer, setOpenDrawer] = React.useState(false)
+    const classes = useStyles({currentPalette})
 
     const listItems1 = ['Inbox', 'Starred', 'Send email', 'Drafts']
     const listItems2 = ['All mail', 'Trash', 'Spam']
@@ -50,7 +52,13 @@ const Navbar = () => {
             <Typography color='inherit'>TODOS WITH HOOKS</Typography>
             <Switch  checked={isDarkMode} onChange={toggleTheme}/>
             <Typography variant="h6" className={classes.title}>Photos</Typography>
-            {auth && (
+            {!isAuth && (
+              <>
+              <Link to="/login" className={classes.link}>Login</Link>
+              <Link to="/register" className={classes.link}>Register</Link>
+              </>
+            )}
+            {isAuth && (
               <div>
                 <IconButton aria-label="account of current user" aria-controls="menu-appbar" aria-haspopup="true" onClick={handleMenu} color="inherit">
                   <AccountCircle />
@@ -58,10 +66,10 @@ const Navbar = () => {
                 <Menu id="menu-appbar" anchorEl={anchorEl} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right', }} open={open} onClose={handleClose}>
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem /*onClick={() => auth.signOut()}*/ onClick={handleClose}>Logout</MenuItem>
                 </Menu>
               </div>
             )}
-            <Switch checked={auth} onChange={(e) => setAuth(e.target.checked)} aria-label="login switch" />
           </Toolbar>
         </AppBar>
 

@@ -14,7 +14,7 @@ const Register = () => {
   }
   const handleSubmit = (e) => {
       console.log(values)
-      const {name, email, password, confirmPassword} = values
+      const {email, password, /*name,  confirmPassword*/} = values
     auth.createUserWithEmailAndPassword(email, password)
     .then(user => console.log(user))
   }
