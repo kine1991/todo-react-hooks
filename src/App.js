@@ -18,7 +18,7 @@ const PageContentWithSpinner = WithSpinner(PageContent)
 
 const App = () => {
   const {loading} = React.useContext(AuthContext)
-  console.log(loading)
+  // console.log(loading)
   return (
     <PageContentWithSpinner loading={loading}>
         <Navbar/>
