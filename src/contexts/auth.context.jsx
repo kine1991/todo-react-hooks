@@ -11,8 +11,9 @@ export const AuthProvider = ({children}) => {
 
     React.useEffect(() => {
         auth.onAuthStateChanged(user => {
-            // console.log(user.email, user.uid)
-            setUserData({email: user.email, uid: user.uid})
+            if(user) {
+                setUserData({email: user.email, uid: user.uid})
+            }
             setLoading(false)
         })
     }, [])

@@ -16,7 +16,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-// import { auth } from '../../firebase/firebase'
+import { auth } from '../../firebase/firebase'
 
 
 import { ThemeContext } from '../../contexts/theme.context'
@@ -52,6 +52,7 @@ const Navbar = () => {
             <Typography color='inherit'>TODOS WITH HOOKS</Typography>
             <Switch  checked={isDarkMode} onChange={toggleTheme}/>
             <Typography variant="h6" className={classes.title}>Photos</Typography>
+
             {!isAuth && (
               <>
               <Link to="/login" className={classes.link}>Login</Link>
@@ -66,7 +67,7 @@ const Navbar = () => {
                 <Menu id="menu-appbar" anchorEl={anchorEl} anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted transformOrigin={{ vertical: 'top', horizontal: 'right', }} open={open} onClose={handleClose}>
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
                   <MenuItem onClick={handleClose}>My account</MenuItem>
-                  <MenuItem /*onClick={() => auth.signOut()}*/ onClick={handleClose}>Logout</MenuItem>
+                  <MenuItem onClick={() => {handleClose(); auth.signOut()}}>Logout</MenuItem>
                 </Menu>
               </div>
             )}

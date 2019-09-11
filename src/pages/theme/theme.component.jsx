@@ -20,7 +20,10 @@ const ThemePage = (props) => {
         }, 3000);
       });
       p.then(() => setLoading(false))
+      return () => console.log('I am unmounting');
     }, [])
+
+
     
 
     
