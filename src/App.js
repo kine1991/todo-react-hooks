@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 import TodoApp from "./pages/todo-app/todo-app.component";
 import PageContent from './components/page-content/page-content.component'
@@ -17,15 +17,15 @@ import { AuthContext } from './contexts/auth.context'
 const PageContentWithSpinner = WithSpinner(PageContent)
 
 const App = () => {
-  const {loading} = React.useContext(AuthContext)
-  // console.log(loading)
+  const {loading, isAuth} = React.useContext(AuthContext)
+  console.log(isAuth)
   return (
     <PageContentWithSpinner loading={loading}>
         <Navbar/>
         <Switch>
           <Route exact path="/" render={() => <h1>Home</h1>}/>
-          <Route exact path="/login" component={Login}/>
-          <Route exact path="/register" component={Register}/>
+          <Route exact path="/login" render={() => isAuth ? <Redirect to="/"/> : <Login/>}/>
+          <Route exact path="/register" render={() => isAuth ? <Redirect to="/"/> : <Register/>}/>
           <Route exact path="/todo" component={TodoApp}/>
           <Route exact path="/settings/theme" component={ThemePage}/>
         </Switch>
