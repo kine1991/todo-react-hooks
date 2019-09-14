@@ -10,6 +10,7 @@ ReactDOM.render(
     <ThemeProvider>
         <AuthProvider>
             <BrowserRouter>
+                
                 <App />
             </BrowserRouter>
         </AuthProvider>

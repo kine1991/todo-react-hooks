@@ -5,6 +5,7 @@ import { auth } from '../../firebase/firebase'
 import { useStyles } from './login.styles'
 import CustomTextField from '../../components/custom-textfield/custom-textfield.component'
 import CustomButton from '../../components/custom-button/custom-button.component'
+import {TextValidator} from 'react-material-ui-form-validator';
 
 const Login = () => {
   const [values, setValues] = React.useState({email: '', password: ''})
@@ -24,20 +25,26 @@ const Login = () => {
 
   const classes = useStyles()
 
+
+
   return (
     <div className={classes.login}>
         <ValidatorForm /*ref="form"*/ className={classes.form} onSubmit={handleSubmit} onError={errors => console.log(errors)}>
         <h1 className={classes.title}>Login</h1>
-            {/* <TextValidator  fullWidth label="Email" onChange={handleChange} name="email" value={values.email} validators={['required', 'isEmail']} errorMessages={['this field is required', 'email is not valid']}/> */}
+            <TextValidator variant="outlined" color="secondary" fullWidth label="Email" onChange={handleChange} name="email" value={values.email} validators={['required', 'isEmail']} errorMessages={['this field is required', 'email is not valid']}/>
             {/* <TextValidator margin="normal" fullWidth label="Password" onChange={handleChange} name="password" value={values.password} validators={['required']} errorMessages={['this field is required']}/> */}
 
-            <CustomTextField variant="outlined" margin="dense" fullWidth label="Email" onChange={handleChange} name="email" value={values.email} validators={['required', 'isEmail']} errorMessages={['this field is required', 'email is not valid']}/>
-            <CustomTextField variant="outlined" margin="dense" fullWidth label="Password" onChange={handleChange} name="password" value={values.password} validators={['required']} errorMessages={['this field is required']}/>
+            <CustomTextField variant="outlined" margin="dense" fullWidth label="Email" onChange={handleChange} type="email" name="email" value={values.email} validators={['required', 'isEmail']} errorMessages={['this field is required', 'email is not valid']}/>
+            <CustomTextField variant="outlined" margin="dense" fullWidth label="Password" onChange={handleChange} type="password" name="password" value={values.password} validators={['required']} errorMessages={['this field is required']}/>
 
-            <Button className={classes.button} variant="contained" color="primary"  fullWidth type="submit">Submit</Button>
-            <Button className={classes.button} color="primary" variant="outlined" fullWidth>Google</Button>
-            <CustomButton/>
+            <Button color="primary" className={`${classes.button} custom-button`} variant="contained"   fullWidth type="submit">Submit</Button>
+            <Button color="primary" className={`${classes.button} custom-button`}  variant="outlined" fullWidth>Google</Button>
+            {/* <CustomButton className={classes.xxx}>Custom Button</CustomButton> */}
 
+            {/* <Button className={`${classes.button} custom-button`}>Button</Button> */}
+            <Button color="primary">Primary</Button>
+            <Button color="primary" variant="contained" fullWidth>Submit</Button>
+            <TextValidator variant="outlined" color="secondary" fullWidth label="Email" onChange={handleChange} name="email" value={values.email} validators={['required', 'isEmail']} errorMessages={['this field is required', 'email is not valid']}/>
         </ValidatorForm>
     </div>
   );
