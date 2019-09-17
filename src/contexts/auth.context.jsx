@@ -9,6 +9,7 @@ export const AuthProvider = ({children}) => {
     const [loading, setLoading] = React.useState(true)
     
     // const isAuth = Boolean(userData);
+    // console.log('userData')
     // console.log(userData)
 
     React.useEffect(() => {

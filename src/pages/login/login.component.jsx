@@ -1,7 +1,8 @@
 import React from "react";
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-import { auth } from '../../firebase/firebase'
+import firebase, { auth } from '../../firebase/firebase'
+
 import { useStyles } from './login.styles'
 
 const Login = () => {
@@ -16,9 +17,11 @@ const Login = () => {
       .then(user => console.log(user))
   }
 
-  // const x = () => {
-  //   auth.
-  // }
+  const hangleWithGoogle = () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account'});
+    auth.signInWithPopup(provider).then(x => console.log(x))
+  }
 
   const classes = useStyles()
 
@@ -29,7 +32,7 @@ const Login = () => {
             <TextValidator variant="outlined" margin="dense" fullWidth label="Email" onChange={handleChange} type="email" name="email" value={values.email} validators={['required', 'isEmail']} errorMessages={['this field is required', 'email is not valid']}/>
             <TextValidator variant="outlined" margin="dense" fullWidth label="Password" onChange={handleChange} type="password" name="password" value={values.password} validators={['required']} errorMessages={['this field is required']}/>
             <Button color="primary" className={`${classes.button} custom-button`} variant="contained"   fullWidth type="submit">Submit</Button>
-            <Button color="primary" className={`${classes.button} custom-button`}  variant="outlined" /*onClick={hangleGoogleSign}*/ fullWidth>Google</Button>
+            <Button color="primary" className={`${classes.button} custom-button`}  variant="outlined" onClick={hangleWithGoogle} fullWidth>Google</Button>
         </ValidatorForm>
     </div>
   );

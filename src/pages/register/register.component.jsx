@@ -19,7 +19,6 @@ const Register = () => {
     const userRef = firestore.doc(`users/${user.uid}`)
     const snapShot = await userRef.get()
     if(!snapShot.exists){
-      console.log('not exist')
       const createdAt = new Date();
       await userRef.set({
         displayName,
@@ -27,7 +26,6 @@ const Register = () => {
         createdAt
       });
     } else {
-      console.log('exist')
     }
   }
 
@@ -38,7 +36,6 @@ const Register = () => {
         }
         return true;
     });
-    // console.log(values.password, values.confirmPassword)
   }, [values.password, values.confirmPassword])
 
   const classes = useStyles()
