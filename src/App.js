@@ -7,6 +7,8 @@ import Navbar from './components/navbar/navbar.component'
 import ThemePage from './pages/theme/theme.component'
 import Login from './pages/login/login.component'
 import Register from './pages/register/register.component'
+import ArticleAdmin from './pages/admin/article/article.admin.component'
+
 import WithSpinner from './components/with-spinner/with-spinner.component'
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme /*, makeStyles */} from '@material-ui/core/styles';
@@ -21,14 +23,8 @@ const PageContentWithSpinner = WithSpinner(PageContent)
 const App = () => {
   const {loading, isAuth} = React.useContext(AuthContext);
   const {currentPalette} = React.useContext(ThemeContext);
-// console.log(isAuth)
   const {background, navbar, mainColor, element} = currentPalette;
   // const theme = createMuiTheme({background, navbar, mainColor, element});
-
-  // React.useEffect(() => {
-  //   console.log(isAuth)
-  // }, [isAuth])
-
   const theme = createMuiTheme({
     overrides: {
       // MuiInput: {
@@ -71,6 +67,9 @@ const App = () => {
             <Route exact path="/register" render={() => isAuth ? <Redirect to="/"/> : <Register/>}/>
             <Route exact path="/todo" component={TodoApp}/>
             <Route exact path="/settings/theme" component={ThemePage}/>
+            <Route exact path="/settings/theme" component={ThemePage}/>
+            
+            <Route exact path="/admin/article" component={ArticleAdmin}/>
           </Switch>
       </PageContentWithSpinner>
     </ThemeProvider>

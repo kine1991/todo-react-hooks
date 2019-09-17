@@ -11,13 +11,16 @@ export const useStyles = makeStyles(theme => ({
     form: {
         padding: "0 3rem",
     },
-    button: {
-        marginTop: theme.spacing(3),
-    },
-    title: {
-        paddingTop: "1rem",
-        textAlign: "center",
-        margin: "0",
-        // marginTop: "3rem"
-    },
+    // button: {
+    //     marginTop: theme.spacing(3),
+    // },
+    // title: {
+    //     paddingTop: "1rem",
+    //     textAlign: "center",
+    //     margin: "0",
+    //     // marginTop: "3rem"
+    // },
+    // xxx: {
+    //     marginTop: "10rem"
+    // }
 })) 
