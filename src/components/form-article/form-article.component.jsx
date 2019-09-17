@@ -5,11 +5,10 @@ import { firestore } from '../../firebase/firebase'
 import { useStyles } from './form-article.styles'
 import { AuthContext } from '../../contexts/auth.context'
 
+
+import slugify from 'slugify'
 // import MenuItem from '@material-ui/core/MenuItem';
 // import Select from '@material-ui/core/Select';
-
-
-
 
 
 const FormArticle = () => {
@@ -28,9 +27,14 @@ const FormArticle = () => {
     //     });
     //   }, [values.password, values.confirmPassword])
 
+    React.useEffect(() => {
+        setValues({...values, 'captionSlugify': slugify(values.caption) })
+    }, [values.caption])
+
     const handleChange = (e) => {
-      setValues({...values, [e.target.name]: e.target.value })
+        setValues({...values, [e.target.name]: e.target.value })
     }
+
     const handleSubmit = async e => {
       e.preventDefault();
       try {
@@ -64,11 +68,11 @@ const FormArticle = () => {
 
     return (
         <ValidatorForm onSubmit={handleSubmit}>
-            <TextValidator name="caption" placeholder="Caption" variant="outlined" margin="dense" fullWidth onChange={handleChange}/>
-            <TextValidator name="captionSlugify" placeholder="Caption Slugify" variant="outlined" margin="dense" fullWidth onChange={handleChange} />
-            <TextValidator name="briefBody" placeholder="Brief Body" variant="outlined" margin="dense" fullWidth  onChange={handleChange}   multiline={true} rows={3} rowsMax={5}/>
-            <TextValidator name="body" placeholder="Body" variant="outlined" margin="dense" fullWidth  onChange={handleChange}   multiline={true} rows={5} rowsMax={6}/>
-            <TextValidator name="author" placeholder="Autor" variant="outlined" margin="dense" fullWidth  onChange={handleChange}/>
+            <TextValidator name="caption" placeholder="Caption" variant="outlined" margin="dense" fullWidth value={values.caption} onChange={handleChange}/>
+            <TextValidator name="captionSlugify" placeholder="Caption Slugify" variant="outlined" margin="dense" fullWidth value={values.captionSlugify} onChange={handleChange} />
+            <TextValidator name="briefBody" placeholder="Brief Body" variant="outlined" margin="dense" fullWidth  value={values.briefBody} onChange={handleChange}   multiline={true} rows={3} rowsMax={5}/>
+            <TextValidator name="body" placeholder="Body" variant="outlined" margin="dense" fullWidth  value={values.body} onChange={handleChange}   multiline={true} rows={5} rowsMax={6}/>
+            <TextValidator name="author" placeholder="Autor" variant="outlined" margin="dense" fullWidth  value={values.author} onChange={handleChange}/>
             {/* <Select value={values.age} onChange={handleChange} fullWidth placeholder="select autor">
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
