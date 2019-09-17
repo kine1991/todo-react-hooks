@@ -16,7 +16,7 @@ export const useStyles = makeStyles(theme => ({
     },
     link: {
         textDecoration: "none",
-        color: "white",
+        color: "inherit",
         padding: "0 1rem"
     },
 }))

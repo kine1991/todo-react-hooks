@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { ThemeContext } from '../../contexts/theme.context'
 import chroma from 'chroma-js'
 import grey from '@material-ui/core/colors/grey';
+import red from '@material-ui/core/colors/red';
 
 const StyledTextField = withStyles({
   root: {
@@ -28,9 +29,10 @@ const StyledTextField = withStyles({
         borderColor: props =>  chroma(props.color).luminance() >= 0.7 ? grey[900]: grey[100],
       },
     },
+    
   },
   input: {
-    color: props =>  chroma(props.color).luminance() >= 0.7 ? grey[900]: grey[100],
+    color: props =>  chroma(props.color).luminance() >= 0.7 ? red[900]: red[100],
   }
 })(({ classes, color, ...other }) => <TextValidator className={classes.root} InputProps={{className: classes.input}} {...other} />);
 

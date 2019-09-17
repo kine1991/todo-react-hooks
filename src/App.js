@@ -9,24 +9,61 @@ import Login from './pages/login/login.component'
 import Register from './pages/register/register.component'
 import WithSpinner from './components/with-spinner/with-spinner.component'
 import { ThemeProvider } from '@material-ui/styles';
-
+import { createMuiTheme /*, makeStyles */} from '@material-ui/core/styles';
+import grey from '@material-ui/core/colors/grey';
+import chroma from 'chroma-js'
 import { AuthContext } from './contexts/auth.context'
 import { ThemeContext } from './contexts/theme.context'
 
-// const PageContentWithSpinner = WithSpinner(PageContent)
+const PageContentWithSpinner = WithSpinner(PageContent)
 
 
 const App = () => {
   const {loading, isAuth} = React.useContext(AuthContext);
   const {currentPalette} = React.useContext(ThemeContext);
-
+// console.log(isAuth)
   const {background, navbar, mainColor, element} = currentPalette;
-  const theme = {background, navbar, mainColor, element};
+  // const theme = createMuiTheme({background, navbar, mainColor, element});
+
+  // React.useEffect(() => {
+  //   console.log(isAuth)
+  // }, [isAuth])
+
+  const theme = createMuiTheme({
+    overrides: {
+      // MuiInput: {
+      //   root: {
+      //     "&:hover": {
+      //       borderColor: "red"
+      //     }
+      //   },
+      // },
+      MuiInputBase: {
+        root: {
+          color: props =>  chroma(theme.navbar).luminance() >= 0.7 ? grey[900]: grey[100], // цвет текста ввода
+        }
+      },
+
+    },
+
+    palette: {
+      // primary: purple,
+      primary: {
+        main: "#3fff99"
+      },
+      secondary: {
+        main: "#fff111"
+      }
+    },
+    background,
+    navbar,
+    mainColor,
+    element
+  });
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <PageContentWithSpinner loading={loading}> */}
-      <PageContent>
+      <PageContentWithSpinner loading={loading}>
           <Navbar/>
           <Switch>
             <Route exact path="/" render={() => <h1>Home</h1>}/>
@@ -35,9 +72,7 @@ const App = () => {
             <Route exact path="/todo" component={TodoApp}/>
             <Route exact path="/settings/theme" component={ThemePage}/>
           </Switch>
-
-      </PageContent>
-      {/* </PageContentWithSpinner> */}
+      </PageContentWithSpinner>
     </ThemeProvider>
   )
 }
