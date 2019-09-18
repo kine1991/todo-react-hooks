@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-import /*firebase,*/ { firestore } from '../../firebase/firebase'
+import firebase, { firestore } from '../../firebase/firebase'
 import { useStyles } from './form-article.styles'
 import { AuthContext } from '../../contexts/auth.context'
 import slugify from 'slugify'
@@ -30,8 +30,6 @@ const FormArticle = () => {
                     itemsArray.add(doc.data().author)
                 })
                 setAuthorArray([...itemsArray])
-
-                // console.log(snapShot)
                 if(snapShot.exists){
                 }
             } catch (e) {
@@ -67,6 +65,7 @@ const FormArticle = () => {
             alert('Slugify already exists')
         } else {
             await articleRef.set(data, { merge: false });
+            setValues({caption: '', captionSlugify: '', briefBody: '', body: '', author: ''})
         }
       } catch (err) {
           console.error("Error writing document: ", err);
@@ -77,7 +76,13 @@ const FormArticle = () => {
         // const articleRef = firestore.collection("test").doc(values.captionSlugify);
         // const snapShot = await articleRef.get();
         const articleRef = firestore.collection("test").doc("frank")
+        let newUser = {
+            dispalayName: 'Nikolay',
+            createAt: firebase.firestore.FieldValue.serverTimestamp()
+        }
         articleRef.update({
+            user: newUser,
+            author: "Root"
             // regions: firebase.firestore.FieldValue.arrayUnion("rrrr3") // добавляет уникальный id
             // regions: firebase.firestore.FieldValue.arrayRemove("rrrr2") // delete
             // regionsIncrement: firebase.firestore.FieldValue.increment(50) // delete

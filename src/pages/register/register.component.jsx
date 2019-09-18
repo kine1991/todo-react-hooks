@@ -1,7 +1,7 @@
 import React from "react";
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-import { auth, firestore } from '../../firebase/firebase'
+import firebase, { auth, firestore } from '../../firebase/firebase'
 import { useStyles } from './register.styles'
 
 
@@ -15,17 +15,40 @@ const Register = () => {
   const handleSubmit = async () => {
     const {email, password, displayName /* confirmPassword*/} = values
     const {user} = await auth.createUserWithEmailAndPassword(email, password)
-    console.log(user)
+    // console.log(user)
     const userRef = firestore.doc(`users/${user.uid}`)
     const snapShot = await userRef.get()
     if(!snapShot.exists){
-      const createdAt = new Date();
       await userRef.set({
         displayName,
         email, 
-        createdAt
+        createAt: firebase.firestore.FieldValue.serverTimestamp()
       });
     } else {
+    }
+  }
+
+  const hangleWithGoogle = async () => {
+    try{
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: 'select_account'});
+      const {user} = await auth.signInWithPopup(provider)
+      const userRef = firestore.doc(`users/${user.uid}`)
+      const snapShot = await userRef.get()
+      if(!snapShot.exists){
+        console.log(user)
+        await userRef.set({
+          displayName: user.displayName,
+          email: user.email, 
+          phoneNumber: user.phoneNumber,
+          photoURL: user.photoURL,
+          emailVerified: user.emailVerified,
+          createAt: firebase.firestore.FieldValue.serverTimestamp()
+        })
+
+      }
+    } catch(err){
+      console.log(err)
     }
   }
 
@@ -49,7 +72,7 @@ const Register = () => {
             <TextValidator margin="normal" fullWidth label="Password" onChange={handleChange} name="password" type="password" value={values.password} validators={['required']} errorMessages={['this field is required']}/>
             <TextValidator margin="normal" fullWidth label="Confirm Password" onChange={handleChange} name="confirmPassword" type="password" value={values.confirmPassword} validators={['required', 'isPasswordMatch']} errorMessages={['this field is required', 'Password do not match']}/>
             <Button className={classes.button} variant="contained" color="primary"  fullWidth type="submit">Submit</Button>
-            <Button className={classes.button} color="primary" variant="outlined" fullWidth>Google</Button>
+            <Button className={classes.button} color="primary" variant="outlined" fullWidth onClick={hangleWithGoogle}>Google</Button>
         </ValidatorForm>
     </div>
   );
