@@ -9,7 +9,7 @@ import ThemePage from './pages/theme/theme.component'
 import Login from './pages/login/login.component'
 import Register from './pages/register/register.component'
 import ArticleAdmin from './pages/admin/article/article.admin.component'
-import AccountPage from './pages/settings/account/account'
+import SettingsPage from './pages/settings/settings'
 
 import WithSpinner from './components/with-spinner/with-spinner.component'
 import { ThemeProvider } from '@material-ui/styles';
@@ -26,6 +26,7 @@ const App = () => {
   const {loading, isAuth} = React.useContext(AuthContext);
   const {currentPalette} = React.useContext(ThemeContext);
   const {background, navbar, mainColor, element} = currentPalette;
+  // console.log(chroma(background).darken(2))
   // const theme = createMuiTheme({background, navbar, mainColor, element});
   const theme = createMuiTheme({
     overrides: {
@@ -53,6 +54,10 @@ const App = () => {
         main: "#fff111"
       }
     },
+    backgroundBrighten: chroma(background).brighten(0.1).hex(),
+    // backgroundDarken: chroma(background).darken(.1).hex(),
+    colorBrighten: chroma(background).luminance() >= 0.7 ? grey[900]: grey[100], 
+    color: chroma(background).luminance() >= 0.7 ? grey[900]: grey[100], 
     background,
     navbar,
     mainColor,
@@ -69,7 +74,7 @@ const App = () => {
             <Route exact path="/register" render={() => isAuth ? <Redirect to="/"/> : <Register/>}/>
             <Route exact path="/todo" component={TodoApp}/>
             <Route exact path="/settings/theme" component={ThemePage}/>
-            <Route exact path="/settings/account" component={AccountPage}/>
+            <Route path="/settings" component={SettingsPage}/>
             
             <Route exact path="/admin/article" component={ArticleAdmin}/>
           </Switch>
